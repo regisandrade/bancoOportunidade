@@ -1,0 +1,35 @@
+<?php
+//===============================================//
+// Proprietário..: IPECON - Ensino e Consultoria
+// Site..........: www.ipecon.com.br
+// Autor.........: Régis Rodrigues de Andrade
+// Página........: Conexão com o Banco de Dados
+//===============================================//
+
+define(USUARIO_IPECON, 'ipecon1_ipecon');
+define(SENHA_IPECON, 'nich1504');
+define(BANCO_IPECON, 'ipecon1_ipecon');
+
+define(USUARIO_OPORTUNIDADE, 'ipecon1_oportu');
+define(SENHA_OPORTUNIDADE, 'nich1504!!');
+define(BANCO_OPORTUNIDADE, 'ipecon1_oportunidade');
+
+define(HOST, 'localhost');
+define(TIPOBANCO, 'mysql');
+
+try {
+	/* Conexao com o banco de oportunidade */
+	$pdo = new PDO('{TIPOBANCO}:host={HOST};dbname={BANCO_OPORTUNIDADE}', USUARIO_OPORTUNIDADE, SENHA_OPORTUNIDADE);
+	$pdo->exec("SET CHARACTER SET utf8");
+} catch (Exception $e) {
+	die("Erro conexao bcoOportunidade: <code>" . $e->getMessage() . "</code>");
+}
+
+try {
+	/* Conexao com o Ipecon */
+	$pdoIpecon = new PDO('{TIPOBANCO}:host={HOST};dbname={BANCO_IPECON}', USUARIO_IPECON, SENHA_IPECON);
+	$pdoIpecon->exec("SET CHARACTER SET utf8");
+} catch (Exception $e) {
+	die("Erro conexao Ipecon: <code>" . $e->getMessage() . "</code>");
+}
+?>
