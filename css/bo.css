@@ -1,0 +1,100 @@
+/* 
+    Document   : bo
+    Created on : 09/10/2012, 22:45:58
+    Author     : Regis
+    Description: Estilos exclusivo do banco de oportunidade
+*/
+body { 
+    background-color: #F7F7F7;
+    font: normal 12px/20px Helvetica,Arial;
+}
+.ui-icon{
+    float: left;
+}
+#listaVagas, #tabelaEmpresa, #tabelaSenhaEmpresa{
+    width: 100%;
+}
+#listaVagas{
+    border: solid 1px #CCCCCC;
+}
+#listaVagas td{
+    padding: 3px;
+    font: normal 12px/20px Helvetica,Arial;
+}
+#detalheVagas td{
+    padding: 3px;
+    font: normal 14px/22px Helvetica,Arial;
+}
+.tdCinzaClaro{
+    background-color: #EFEFEF;
+}
+.data{
+    width: 8%;
+    text-align: center;
+}
+.opcoes{
+    width: 5%;
+    text-align: center;
+}
+.cabecalho{
+    padding: 3px;
+    font: bold 12px/20px Helvetica,Arial;
+    background-color: #9FB6CD;
+}
+/* Formatação de campo de formulários */
+input, textarea, select{
+    margin-bottom: 5px;
+    padding: 3px;
+    border: solid 1px #CCCCCC;
+    font: normal 12px/20px Helvetica,Arial;
+}
+.uf{
+    padding: 4px;
+}
+.txtData{
+    width: 70px;
+}
+.txtPequeno{
+    width: 140px;
+}
+.txtMedio{
+    width: 180px;
+}
+.txtGrande{
+    width: 350px;
+}
+#tabelaSenhaEmpresa .tdFormulario{
+    width: 10%;
+    font-weight: bold;
+}
+#tabelaEmpresa .tdFormulario{
+    width: 16%;
+}
+
+/* Final da formatação de formulários */
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+h1, h2{
+    text-align: center;color: #505667;
+    font: 30px museo-sans-1,sans-serif;
+    margin: 20px 0;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.vermelho{
+    color: #FF0000;
+}
+#formCurriculo .vermelho{
+    color: #FF0000;
+}
+.txtCentralizado{
+    text-align: center;
+}
+.imgCalendario{
+    width: 18px;
+    height: 18px
+}

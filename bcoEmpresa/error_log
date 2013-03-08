@@ -1,0 +1,14 @@
+[04-Feb-2013 13:06:48] PHP Warning:  PHP Startup: PDO: Unable to initialize module
+Module compiled with module API=20090626, debug=0, thread-safety=0
+PHP    compiled with module API=20060613, debug=0, thread-safety=0
+These options need to match
+ in Unknown on line 0
+[04-Feb-2013 13:06:48] PHP Warning:  Cannot load module 'pdo_sqlite' because required module 'pdo' is not loaded in Unknown on line 0
+[04-Feb-2013 13:06:48] PHP Fatal error:  Class 'PDO' not found in /home/ipecon1/public_html/admin/bcoOportunidade/conexaoBdo.inc.php on line 11
+[04-Feb-2013 13:13:28] PHP Warning:  PHP Startup: PDO: Unable to initialize module
+Module compiled with module API=20090626, debug=0, thread-safety=0
+PHP    compiled with module API=20060613, debug=0, thread-safety=0
+These options need to match
+ in Unknown on line 0
+[04-Feb-2013 13:13:28] PHP Warning:  Cannot load module 'pdo_sqlite' because required module 'pdo' is not loaded in Unknown on line 0
+[04-Feb-2013 13:13:28] PHP Fatal error:  Class 'PDO' not found in /home/ipecon1/public_html/admin/bcoOportunidade/conexaoBdo.inc.php on line 11

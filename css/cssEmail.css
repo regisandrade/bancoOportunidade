@@ -1,0 +1,33 @@
+body{
+	background-color: #F7F7F7;
+    font: normal 12px/20px Helvetica,Arial;
+}
+
+#cabecalho{
+	width: 90%;
+	background-color: #FFFFFF;
+	border: solid 1px #CCC;
+}
+#cabecalho .logomarca{
+	text-align: left;
+}
+#cabecalho .titulo{
+	text-align: right;
+	font: normal 14px/22px Helvetica,Arial;
+}
+
+#conteudo{
+	width: 90%;
+	background-color: #FFFFFF;
+	border: solid 1px #CCC;
+}
+#conteudo span{
+	text-align: left;
+}
+
+#rodape{
+	width: 90%;
+}
+#rodape p{
+	text-align: center;
+}
