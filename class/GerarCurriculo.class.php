@@ -52,7 +52,21 @@ class GerarCurriculo extends FPDF{
 		              ,DISPONIBILIDADE_HORARIO
 		              ,MSN
 		              ,TWITTER
-		              ,FACEBOOK                      
+		              ,FACEBOOK
+                      ,NOME_EMPRESA_1
+                      ,ATIVIDADE_EMPRESA_1
+                      ,DATA_ADMISSAO_1
+                      ,DATA_DEMISSAO_1
+                      ,FUNCAO_EXERCIDA_1
+                      ,ATIVIDADE_EXERCIDA_1
+                      ,SALARIO_1
+                      ,NOME_EMPRESA_2
+                      ,ATIVIDADE_EMPRESA_2
+                      ,DATA_ADMISSAO_2
+                      ,DATA_DEMISSAO_2
+                      ,FUNCAO_EXERCIDA_2
+                      ,ATIVIDADE_EXERCIDA_2
+                      ,SALARIO_2
 		        from
 		               curriculos
 		        where \n";
@@ -94,9 +108,10 @@ class GerarCurriculo extends FPDF{
         $this->SetFont('helvetica','',11);
         $this->Cell(165,7,iconv('utf-8','iso-8859-1',$registro->CIDADE_NASCIMENTO).' / '.$registro->CIDADE_NASCIMENTO, 0, 1, 'L');
 
-		$this->SetFont('helvetica','B',11);
+		$this->SetFont('helvetica','B',13);
         $this->Cell(200,7,'Documentos: ', 'B', 1, 'L');
 
+        $this->SetFont('helvetica','',11);
         $this->Cell(35,7,'RG: ', 0, 0, 'L');
         $this->SetFont('helvetica','',11);
         $this->Cell(165,7,$registro->RG, 0, 1, 'L');
@@ -112,29 +127,6 @@ class GerarCurriculo extends FPDF{
         $this->Cell(35,7,'CPF: ', 0, 0, 'L');
         $this->SetFont('helvetica','',11);
         $this->Cell(165,7,$registro->CPF, 0, 1, 'L');
-        if($registro->SEXO == 'M'){
-        	$this->SetFont('helvetica','B',11);
-        	$this->Cell(35,7,'Reservista: ', 0, 0, 'L');
-        	$this->SetFont('helvetica','',11);
-        	$this->Cell(165,7,$registro->CARTEIRA_RESERVISTA, 0, 1, 'L');
-    	}
-        $this->SetFont('helvetica','B',11);
-        $this->Cell(35,7,'PIS/PASEP: ', 0, 0, 'L');
-        $this->SetFont('helvetica','',11);
-        $this->Cell(165,7,$registro->PIS_PASEP, 0, 1, 'L');
-        $this->SetFont('helvetica','B',11);
-        $this->Cell(35,7,'Data Cadastro PIS/PASEP: ', 0, 0, 'L');
-        $this->SetFont('helvetica','',11);
-        $this->Cell(165,7,Util::formataData($registro->DATA_CADASTRO_PIS_PASEP, '-', '/'), 0, 1, 'L');
-        $this->SetFont('helvetica','B',11);
-        $this->Cell(35,7,iconv('utf-8','iso-8859-1','TÃ­tulo Eleitor: '), 0, 0, 'L');
-        $this->SetFont('helvetica','',11);
-        $this->Cell(165,7,$registro->TITULO_ELEITOR.' Zona: '.$registro->ZONA.iconv('utf-8','iso-8859-1',' SeÃ§Ã£o: ').$registro->SECAO, 0, 1, 'L');
-        $this->SetFont('helvetica','B',11);
-        $this->Cell(35,7,iconv('utf-8','iso-8859-1','HabilitaÃ§Ã£o: '), 0, 0, 'L');
-        $this->SetFont('helvetica','',11);
-        $this->Cell(165,7,$registro->HABILITACAO.' Categoria: '.$registro->CATEGORIA.' Validade: '.Util::formataData($registro->VALIDADE, '-', '/'), 0, 1, 'L');
-
         $this->SetFont('helvetica','B',11);
         $this->Cell(35,7,'Estado Civil: ', 0, 0, 'L');
         $this->SetFont('helvetica','',11);
@@ -168,10 +160,44 @@ class GerarCurriculo extends FPDF{
         $this->SetFont('helvetica','',11);
         $this->Cell(165,7,$registro->EMAIL, 0, 1, 'L');
 
+        if($registro->SEXO == 'M'){
+            $this->SetFont('helvetica','B',11);
+            $this->Cell(35,7,'Reservista: ', 0, 0, 'L');
+            $this->SetFont('helvetica','',11);
+            $this->Cell(165,7,$registro->CARTEIRA_RESERVISTA, 0, 1, 'L');
+        }
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'PIS/PASEP: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,$registro->PIS_PASEP, 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Data Cadastro PIS/PASEP: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,Util::formataData($registro->DATA_CADASTRO_PIS_PASEP, '-', '/'), 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,iconv('utf-8','iso-8859-1','TÃ­tulo Eleitor: '), 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,$registro->TITULO_ELEITOR.' Zona: '.$registro->ZONA.iconv('utf-8','iso-8859-1',' SeÃ§Ã£o: ').$registro->SECAO, 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,iconv('utf-8','iso-8859-1','Habilitação: '), 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,$registro->HABILITACAO.' Categoria: '.$registro->CATEGORIA.' Validade: '.Util::formataData($registro->VALIDADE, '-', '/'), 0, 1, 'L');
+
+        $this->Ln(5);
+
         $this->SetFont('helvetica','B',13);
         $this->Cell(200,7,'OBJETIVO', 'B', 1, 'L');
         $this->SetFont('helvetica','',11);
         $this->MultiCell(165,7,iconv('utf-8','iso-8859-1',$registro->OBJETIVO_PROFISSIONAL), 0, 'L');
+
+        $this->Ln(5);
+
+        $this->SetFont('helvetica','B',13);
+        $this->Cell(200,7,'ÁREA DE INTERESSE', 'B', 1, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->MultiCell(165,7,iconv('utf-8','iso-8859-1',$registro->AREA_INTERESSE), 0, 'L');
+
+        $this->Ln(5);
 
         $this->SetFont('helvetica','B',13);
         $this->Cell(200,7,iconv('utf-8','iso-8859-1','FORMAÇÃO'), 'B', 1, 'L');
@@ -197,47 +223,73 @@ class GerarCurriculo extends FPDF{
         $this->SetFont('helvetica','',11);
         $this->Cell(165,7,$registroGraduacao->Ano_Conclusao, 0, 1, 'L');
 
-        unset($sql,$consulta);
-        $sql = "SELECT * FROM experiencia_profissional WHERE ID_ALUNO = ? ORDER BY ORDEM";
-        $consulta = $pdo->prepare($sql);
-        $consulta->bindParam(1, $this->idAluno, PDO::PARAM_STR, 11);
-        $consulta->execute();
-        
-        /* Se tiver experiencia cadastrada, mostrar abaixo*/
-        if($consulta->rowCount() > 0){
-            while ( $registroExperiencia = $consulta->fetch(PDO::FETCH_OBJ) ) {
-                $this->SetFont('helvetica','B',13);
-                $this->Cell(200,7,iconv('utf-8','iso-8859-1','EXPERIÊNCIA PROFISSIONAL'), 'B', 1, 'L');
-                $this->SetFont('helvetica','B',11);
-                $this->Cell(35,7,'Empresa: ', 0, 0, 'L');
-                $this->SetFont('helvetica','',11);
-                $this->Cell(165,7,$registroExperiencia->NOME_EMPRESA, 0, 1, 'L');
-                $this->SetFont('helvetica','B',11);
-                $this->Cell(35,7,'Atividade da empresa: ', 0, 0, 'L');
-                $this->SetFont('helvetica','',11);
-                $this->Cell(165,7,nl2br($registroExperiencia->ATIVIDADE_EMPRESA), 0, 1, 'L');
-                $this->SetFont('helvetica','B',11);
-                $this->Cell(35,7,'Data admissão: ', 0, 0, 'L');
-                $this->SetFont('helvetica','',11);
-                $this->Cell(165,7,Util::formataData($registroExperiencia->DATA_ADMISSAO, '-', '/'), 0, 1, 'L');
-                $this->SetFont('helvetica','B',11);
-                $this->Cell(35,7,'Data demissão: ', 0, 0, 'L');
-                $this->SetFont('helvetica','',11);
-                $this->Cell(165,7,Util::formataData($registroExperiencia->DATA_DEMISSAO, '-', '/'), 0, 1, 'L');
-                $this->SetFont('helvetica','B',11);
-                $this->Cell(35,7,'Função que exercia: ', 0, 0, 'L');
-                $this->SetFont('helvetica','',11);
-                $this->Cell(165,7,$registroExperiencia->FUNCAO_EXERCIDA, 0, 1, 'L');
-                $this->SetFont('helvetica','B',11);
-                $this->Cell(35,7,'Atividades que exercia: ', 0, 0, 'L');
-                $this->SetFont('helvetica','',11);
-                $this->Cell(165,7,nl2br($registroExperiencia->ATIVIDADES_EXERCIDAS), 0, 1, 'L');
-                $this->SetFont('helvetica','B',11);
-                $this->Cell(35,7,'Salário: ', 0, 0, 'L');
-                $this->SetFont('helvetica','',11);
-                $this->Cell(165,7,number_format($registroExperiencia->SALARIO,2,',','.'), 0, 1, 'L');                
-            } // Fim while
-        }// Fim if
+        $this->Ln(5);
+
+        $this->SetFont('helvetica','B',13);
+        $this->Cell(200,7,iconv('utf-8','iso-8859-1','EXPERIÊNCIA PROFISSIONAL'), 'B', 1, 'L');
+        $this->SetFont('helvetica','B',12);
+        $this->Cell(200,7,iconv('utf-8','iso-8859-1','Última empresa'), 'B', 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Empresa: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,$registroExperiencia->NOME_EMPRESA_1, 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Atividade da empresa: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,nl2br($registroExperiencia->ATIVIDADE_EMPRESA_1), 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Data admissão: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,Util::formataData($registroExperiencia->DATA_ADMISSAO_1, '-', '/'), 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Data demissão: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,Util::formataData($registroExperiencia->DATA_DEMISSAO_1, '-', '/'), 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Função que exercia: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,$registroExperiencia->FUNCAO_EXERCIDA_1, 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Atividades que exercia: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,nl2br($registroExperiencia->ATIVIDADES_EXERCIDAS_1), 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Salário: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,number_format($registroExperiencia->SALARIO_1,2,',','.'), 0, 1, 'L');
+
+        $this->Ln(3);
+
+        $this->SetFont('helvetica','B',12);
+        $this->Cell(200,7,iconv('utf-8','iso-8859-1','Penúltima empresa'), 'B', 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Empresa: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,$registroExperiencia->NOME_EMPRESA_2, 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Atividade da empresa: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,nl2br($registroExperiencia->ATIVIDADE_EMPRESA_2), 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Data admissão: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,Util::formataData($registroExperiencia->DATA_ADMISSAO_2, '-', '/'), 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Data demissão: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,Util::formataData($registroExperiencia->DATA_DEMISSAO_2, '-', '/'), 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Função que exercia: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,$registroExperiencia->FUNCAO_EXERCIDA_2, 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Atividades que exercia: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,nl2br($registroExperiencia->ATIVIDADES_EXERCIDAS_2), 0, 1, 'L');
+        $this->SetFont('helvetica','B',11);
+        $this->Cell(35,7,'Salário: ', 0, 0, 'L');
+        $this->SetFont('helvetica','',11);
+        $this->Cell(165,7,number_format($registroExperiencia->SALARIO_2,2,',','.'), 0, 1, 'L');
 
     }// Fim função conteudo
 
