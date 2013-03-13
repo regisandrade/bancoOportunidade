@@ -45,9 +45,7 @@ switch ($_REQUEST['tipoAcao']) {
                           ,:status)";
             $rs = $pdo->prepare($sql);
 
-            /* @var $dtInicio date */
             $dtInicio = Util::formataData($_REQUEST['dtInicioVigencia'],'/','-','USA');
-            /* @var $dtFinal date */
             $dtFinal = Util::formataData($_REQUEST['dtFinalVigencia'],'/','-','USA');
             /* @var $salario float */
             $salario = str_replace(',','.',str_replace('.','',$_REQUEST['salario']));

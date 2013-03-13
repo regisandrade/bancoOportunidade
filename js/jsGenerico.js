@@ -275,16 +275,16 @@ $(document).ready(function() {
     $('#vencimentoHabilitacao').datepicker({
         dateFormat:"dd/mm/yy"
     });
-    $('#dataAdmissao').datepicker({
-        dateFormat:"dd/mm/yy"
-    });
-    $('#dataDemissao').datepicker({
-        dateFormat:"dd/mm/yy"
-    });
     $('#dataAdmissao_1').datepicker({
         dateFormat:"dd/mm/yy"
     });
     $('#dataDemissao_1').datepicker({
+        dateFormat:"dd/mm/yy"
+    });
+    $('#dataAdmissao_2').datepicker({
+        dateFormat:"dd/mm/yy"
+    });
+    $('#dataDemissao_2').datepicker({
         dateFormat:"dd/mm/yy"
     });
 

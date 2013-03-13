@@ -43,14 +43,14 @@ $sql = "SELECT
               ,DATA_ADMISSAO_1
               ,DATA_DEMISSAO_1
               ,FUNCAO_EXERCIDA_1
-              ,ATIVIDADE_EMPRESA_1
+              ,ATIVIDADE_EXERCIDA_1
               ,SALARIO_1
               ,NOME_EMPRESA_2
               ,ATIVIDADE_EMPRESA_2
               ,DATA_ADMISSAO_2
               ,DATA_DEMISSAO_2
               ,FUNCAO_EXERCIDA_2
-              ,ATIVIDADE_EMPRESA_2
+              ,ATIVIDADE_EXERCIDA_2
               ,SALARIO_2
         FROM
                curriculos
@@ -126,11 +126,11 @@ $registroAluno = $consulta2->fetch(PDO::FETCH_OBJ);
     <input type="hidden" name="ID_CURRICULO" value="<?php echo ($registroCurriculo && $registroCurriculo->ID != '' ? $registroCurriculo->ID : ''); ?>" />
     <input type="hidden" name="tipoAcao" id="tipoAcao" value="<?php echo ($registroCurriculo && $registroCurriculo->ID != '' ? '2' : '1'); ?>"/>
     <input type="hidden" name="cpf" value="<?php echo $_SESSION['id_numero']; ?>" />
-    <input type="hidden" name="idAluno" value="<?php echo ($registroCurriculo && $registroCurriculo->ID_ALUNO != '' ? $registroCurriculo->ID_ALUNO : $registroAluno->ID); ?>" />
+    <input type="hidden" name="idAluno" value="<?php echo ($registroCurriculo && $registroCurriculo->CPF != '' ? $registroCurriculo->CPF : $registroAluno->CPF); ?>" />
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
             <td style="width: 33%" class="vermelho">Nome:</td>
-            <td><input type="text" id="nome" name="nome" class="txtGrande" value="<?php echo ($registroCurriculo && $registroCurriculo->NOME != '') ? iconv('UTF-8','ISO-8859-1',$registroCurriculo->NOME) : ($registroAluno && $registroAluno->Nome != '' ? $registroAluno->Nome : ''); ?>" /></td>
+            <td><input type="text" id="nome" name="nome" class="txtGrande" value="<?php echo ($registroCurriculo && $registroCurriculo->NOME != '') ? utf8_decode($registroCurriculo->NOME) : ($registroAluno && $registroAluno->Nome != '' ? utf8_decode($registroAluno->Nome) : ''); ?>" /></td>
         </tr>
         <tr>
             <td class="vermelho">Sexo:</td>
@@ -142,15 +142,15 @@ $registroAluno = $consulta2->fetch(PDO::FETCH_OBJ);
         </tr>
         <tr>
             <td class="vermelho">Endere&ccedil;o:</td>
-            <td><textarea id="endereco" name="endereco" class="txtGrande"><?php echo ($registroCurriculo && $registroCurriculo->ENDERECO != '') ? iconv('UTF-8','ISO-8859-1',$registroCurriculo->ENDERECO) : ($registroAluno && $registroAluno->Endereco != '' ? iconv('UTF-8','ISO-8859-1',$registroAluno->Endereco) : ''); ?></textarea></td>
+            <td><textarea id="endereco" name="endereco" class="txtGrande"><?php echo ($registroCurriculo && $registroCurriculo->ENDERECO != '') ? utf8_decode($registroCurriculo->ENDERECO) : ($registroAluno && $registroAluno->Endereco != '' ? utf8_decode($registroAluno->Endereco) : ''); ?></textarea></td>
         </tr>
         <tr>
             <td class="vermelho">Bairro:</td>
-            <td><input type="text" id="bairro" name="bairro" class="txtMedio" value="<?php echo ($registroCurriculo && $registroCurriculo->BAIRRO != '') ? iconv('UTF-8','ISO-8859-1',$registroCurriculo->BAIRRO) : ($registroAluno && $registroAluno->Bairro != '' ? iconv('UTF-8','ISO-8859-1',$registroAluno->Bairro) : ''); ?>" /></td>
+            <td><input type="text" id="bairro" name="bairro" class="txtMedio" value="<?php echo ($registroCurriculo && $registroCurriculo->BAIRRO != '') ? utf8_decode($registroCurriculo->BAIRRO) : ($registroAluno && $registroAluno->Bairro != '' ? utf8_decode($registroAluno->Bairro) : ''); ?>" /></td>
         </tr>
         <tr>
             <td class="vermelho">Cidade:</td>
-            <td><input type="text" id="cidade" name="cidade" class="txtMedio" value="<?php echo ($registroCurriculo && $registroCurriculo->CIDADE != '') ? iconv('UTF-8','ISO-8859-1',$registroCurriculo->CIDADE) : ($registroAluno && $registroAluno->Cidade != '' ? iconv('UTF-8','ISO-8859-1',$registroAluno->Cidade) : ''); ?>" /></td>
+            <td><input type="text" id="cidade" name="cidade" class="txtMedio" value="<?php echo ($registroCurriculo && $registroCurriculo->CIDADE != '') ? utf8_decode($registroCurriculo->CIDADE) : ($registroAluno && $registroAluno->Cidade != '' ? utf8_decode($registroAluno->Cidade) : ''); ?>" /></td>
         </tr>
         <tr>
             <td class="vermelho">UF:</td>
@@ -208,7 +208,7 @@ $registroAluno = $consulta2->fetch(PDO::FETCH_OBJ);
         </tr>
         <tr>
             <td>Cidade de Nascimento:</td>
-            <td><input type="text" id="cidadeNascimento" name="cidadeNascimento" class="txtPequeno" value="<?php echo ($registroCurriculo && $registroCurriculo->CIDADE_NASCIMENTO != '') ? $registroCurriculo->CIDADE_NASCIMENTO : ''; ?>" /></td>
+            <td><input type="text" id="cidadeNascimento" name="cidadeNascimento" class="txtPequeno" value="<?php echo ($registroCurriculo && $registroCurriculo->CIDADE_NASCIMENTO != '') ? utf8_decode($registroCurriculo->CIDADE_NASCIMENTO) : ''; ?>" /></td>
         </tr>
         <tr>
             <td>UF de Nascimento:</td>
@@ -257,7 +257,7 @@ $registroAluno = $consulta2->fetch(PDO::FETCH_OBJ);
         </tr>
         <tr>
             <td>Data de Expedi&ccedil;&atilde;o do RG:</td>
-            <td><input type="text" id="dataExpedicaoRg" name="dataExpedicaoRg" class="txtPequeno" value="<?php echo ($registroCurriculo && $registroCurriculo->DATA_EXPEDICAO_RG != '') ? $registroCurriculo->DATA_EXPEDICAO_RG : ''; ?>" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
+            <td><input type="text" id="dataExpedicaoRg" name="dataExpedicaoRg" class="txtPequeno" value="<?php echo ($registroCurriculo && $registroCurriculo->DATA_EXPEDICAO_RG != '') ? Util::formataData($registroCurriculo->DATA_EXPEDICAO_RG,'-','/') : ''; ?>" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
         </tr>
         <tr>
             <td class="vermelho">C.P.F.:</td>
@@ -273,7 +273,7 @@ $registroAluno = $consulta2->fetch(PDO::FETCH_OBJ);
         </tr>
         <tr>
             <td>Data de Cadastro do PIS-PASEP:</td>
-            <td><input type="text" id="dataPisPasep" name="dataPisPasep" class="txtPequeno" maxlength="10" value="<?php echo ($registroCurriculo && $registroCurriculo->DATA_CADASTRO_PIS_PASEP != '') ? $registroCurriculo->DATA_CADASTRO_PIS_PASEP : ''; ?>" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
+            <td><input type="text" id="dataPisPasep" name="dataPisPasep" class="txtPequeno" maxlength="10" value="<?php echo ($registroCurriculo && $registroCurriculo->DATA_CADASTRO_PIS_PASEP != '') ? Util::formataData($registroCurriculo->DATA_CADASTRO_PIS_PASEP,'-','/') : ''; ?>" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
         </tr>
         <tr>
             <td>N&uacute;mero do T&iacute;tulo de Eleitor:</td>
@@ -297,15 +297,15 @@ $registroAluno = $consulta2->fetch(PDO::FETCH_OBJ);
         </tr>
         <tr>
             <td>Vencimento:</td>
-            <td><input type="text" id="vencimentoHabilitacao" name="vencimentoHabilitacao" maxlength="10" class="txtPequeno" value="<?php echo ($registroCurriculo && $registroCurriculo->VALIDADE != '') ? $registroCurriculo->VALIDADE : ''; ?>" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
+            <td><input type="text" id="vencimentoHabilitacao" name="vencimentoHabilitacao" maxlength="10" class="txtPequeno" value="<?php echo ($registroCurriculo && $registroCurriculo->VALIDADE != '') ? Util::formataData($registroCurriculo->VALIDADE,'-','/') : ''; ?>" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
         </tr>
         <tr>
             <td class="vermelho">&Aacute;rea de Interesse:</td>
-            <td><textarea id="areaInteresse" name="areaInteresse" class="txtGrande"><?php echo ($registroCurriculo && $registroCurriculo->AREA_INTERESSE != '') ? iconv('UTF-8','ISO-8859-1',$registroCurriculo->AREA_INTERESSE) : ''; ?></textarea></td>
+            <td><textarea id="areaInteresse" name="areaInteresse" class="txtGrande"><?php echo ($registroCurriculo && $registroCurriculo->AREA_INTERESSE != '') ? utf8_decode($registroCurriculo->AREA_INTERESSE) : ''; ?></textarea></td>
         </tr>
         <tr>
             <td class="vermelho">Objetivo Profissional:</td>
-            <td><textarea id="objetivoProfissional" name="objetivoProfissional" class="txtGrande"><?php echo ($registroCurriculo && $registroCurriculo->OBJETIVO_PROFISSIONAL != '') ? iconv('UTF-8','ISO-8859-1',$registroCurriculo->OBJETIVO_PROFISSIONAL) : ''; ?></textarea></td>
+            <td><textarea id="objetivoProfissional" name="objetivoProfissional" class="txtGrande"><?php echo ($registroCurriculo && $registroCurriculo->OBJETIVO_PROFISSIONAL != '') ? utf8_decode($registroCurriculo->OBJETIVO_PROFISSIONAL) : ''; ?></textarea></td>
         </tr>
         <tr>
             <td class="vermelho">Disponibilidade de Hor&aacute;rio:</td>
@@ -337,62 +337,62 @@ $registroAluno = $consulta2->fetch(PDO::FETCH_OBJ);
         </tr>
         <tr>
             <td>Nome da empresa:</td>
-            <td><input type="text" id="nomeEmpresa_1" name="nomeEmpresa_1" class="txtMedio" value="" /></td>
+            <td><input type="text" id="nomeEmpresa_1" name="nomeEmpresa_1" class="txtMedio" value="<?php echo ($registroCurriculo && $registroCurriculo->NOME_EMPRESA_1 != '') ? utf8_decode($registroCurriculo->NOME_EMPRESA_1) : ''; ?>" /></td>
         </tr>
         <tr>
             <td>Atividade da empresa:</td>
-            <td><textarea id="atividadeEmpresa_1" name="atividadeEmpresa_1" class="txtGrande"></textarea></td>
+            <td><textarea id="atividadeEmpresa_1" name="atividadeEmpresa_1" class="txtGrande"><?php echo ($registroCurriculo && $registroCurriculo->ATIVIDADE_EMPRESA_1 != '') ? utf8_decode($registroCurriculo->ATIVIDADE_EMPRESA_1) : ''; ?></textarea></td>
         </tr>
         <tr>
             <td>Data de admissão:</td>
-            <td><input type="text" id="dataAdmissao_1" name="dataAdmissao_1" class="txtPequeno" maxlength="10" value="" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
+            <td><input type="text" id="dataAdmissao_1" name="dataAdmissao_1" class="txtPequeno" maxlength="10" value="<?php echo ($registroCurriculo && $registroCurriculo->DATA_ADMISSAO_1 != '') ? Util::formataData($registroCurriculo->DATA_DEMISSAO_1,'-','/') : ''; ?>" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
         </tr>
         <tr>
             <td>Data de demissão:</td>
-            <td><input type="text" id="dataDemissao_1" name="dataDemissao_1" class="txtPequeno" maxlength="10" value="" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
+            <td><input type="text" id="dataDemissao_1" name="dataDemissao_1" class="txtPequeno" maxlength="10" value="<?php echo ($registroCurriculo && $registroCurriculo->DATA_DEMISSAO_1 != '') ? Util::formataData($registroCurriculo->DATA_DEMISSAO_1,'-','/') : ''; ?>" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
         </tr>
         <tr>
             <td>Função exercida:</td>
-            <td><input type="text" id="funcaoExercida_1" name="funcaoExercida_1" class="txtMedio" value="" /></td>
+            <td><input type="text" id="funcaoExercida_1" name="funcaoExercida_1" class="txtMedio" value="<?php echo ($registroCurriculo && $registroCurriculo->FUNCAO_EXERCIDA_1 != '') ? utf8_decode($registroCurriculo->FUNCAO_EXERCIDA_1) : ''; ?>" /></td>
         </tr>
         <tr>
             <td>Atividades exercida:</td>
-            <td><textarea id="atividadeExercida_1" name="atividadeExercida_1" class="txtGrande"></textarea></td>
+            <td><textarea id="atividadeExercida_1" name="atividadeExercida_1" class="txtGrande"><?php echo ($registroCurriculo && $registroCurriculo->ATIVIDADE_EXERCIDA_1 != '') ? utf8_decode($registroCurriculo->ATIVIDADE_EXERCIDA_1) : ''; ?></textarea></td>
         </tr>
         <tr>
             <td>Último salário:</td>
-            <td><textarea id="salario_1" name="salario_1" class="txtGrande"></textarea></td>
+            <td><input type="text" id="salario_1" name="salario_1" class="txtPequeno" value="<?php echo ($registroCurriculo && $registroCurriculo->SALARIO_1 != '') ? number_format($registroCurriculo->SALARIO_1,2,',','.') : ''; ?>" /></td>
         </tr>
         <tr>
             <td colspan="2"><u>Penúltima empresa</u>:</td>
         </tr>
         <tr>
             <td>Nome da empresa:</td>
-            <td><input type="text" id="nomeEmpresa_2" name="nomeEmpresa_2" class="txtMedio" value="" /></td>
+            <td><input type="text" id="nomeEmpresa_2" name="nomeEmpresa_2" class="txtMedio" value="<?php echo ($registroCurriculo && $registroCurriculo->NOME_EMPRESA_2 != '') ? utf8_decode($registroCurriculo->NOME_EMPRESA_2) : ''; ?>" /></td>
         </tr>
         <tr>
             <td>Atividade da empresa:</td>
-            <td><textarea id="atividadeEmpresa_2" name="atividadeEmpresa_2" class="txtGrande"></textarea></td>
+            <td><textarea id="atividadeEmpresa_2" name="atividadeEmpresa_2" class="txtGrande"><?php echo ($registroCurriculo && $registroCurriculo->ATIVIDADE_EMPRESA_2 != '') ? utf8_decode($registroCurriculo->ATIVIDADE_EMPRESA_2) : ''; ?></textarea></td>
         </tr>
         <tr>
             <td>Data de admissão:</td>
-            <td><input type="text" id="dataAdmissao_2" name="dataAdmissao_2" class="txtPequeno" maxlength="10" value="" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
+            <td><input type="text" id="dataAdmissao_2" name="dataAdmissao_2" class="txtPequeno" maxlength="10" value="<?php echo ($registroCurriculo && $registroCurriculo->DATA_ADMISSAO_2 != '') ? Util::formataData($registroCurriculo->DATA_ADMISSAO_2,'-','/') : ''; ?>" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
         </tr>
         <tr>
             <td>Data de demissão:</td>
-            <td><input type="text" id="dataDemissao_2" name="dataDemissao_2" class="txtPequeno" maxlength="10" value="" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
+            <td><input type="text" id="dataDemissao_2" name="dataDemissao_2" class="txtPequeno" maxlength="10" value="<?php echo ($registroCurriculo && $registroCurriculo->DATA_DEMISSAO_2 != '') ? Util::formataData($registroCurriculo->DATA_DEMISSAO_2,'-','/') : ''; ?>" />&nbsp;<img src="../admin/bcoOportunidade/imagens/icone-calendario.png" class="imgCalendario" border="0"></td>
         </tr>
         <tr>
             <td>Função exercida:</td>
-            <td><input type="text" id="funcaoExercida_2" name="funcaoExercida_2" class="txtMedio" value="" /></td>
+            <td><input type="text" id="funcaoExercida_2" name="funcaoExercida_2" class="txtMedio" value="<?php echo ($registroCurriculo && $registroCurriculo->FUNCAO_EXERCIDA_2 != '') ? utf8_decode($registroCurriculo->FUNCAO_EXERCIDA_2) : ''; ?>" /></td>
         </tr>
         <tr>
             <td>Atividades exercida:</td>
-            <td><textarea id="atividadeExercida_2" name="atividadeExercida_2" class="txtGrande"></textarea></td>
+            <td><textarea id="atividadeExercida_2" name="atividadeExercida_2" class="txtGrande"><?php echo ($registroCurriculo && $registroCurriculo->ATIVIDADE_EXERCIDA_2 != '') ? utf8_decode($registroCurriculo->ATIVIDADE_EXERCIDA_2) : ''; ?></textarea></td>
         </tr>
         <tr>
-            <td>último salário:</td>
-            <td><textarea id="salario_2" name="salario_2" class="txtGrande"></textarea></td>
+            <td>Último salário:</td>
+            <td><input type="text" id="salario_2" name="salario_2" class="txtPequeno" value="<?php echo ($registroCurriculo && $registroCurriculo->SALARIO_2 != '') ? number_format($registroCurriculo->SALARIO_2,2,',','.') : ''; ?>" /></td>
         </tr>
     </table>
 </form>

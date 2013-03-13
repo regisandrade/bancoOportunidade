@@ -56,14 +56,14 @@ switch ($_REQUEST['tipoAcao']) {
                           ,DATA_ADMISSAO_1
                           ,DATA_DEMISSAO_1
                           ,FUNCAO_EXERCIDA_1
-                          ,ATIVIDADE_EMPRESA_1
+                          ,ATIVIDADE_EXERCIDA_1
                           ,SALARIO_1
                           ,NOME_EMPRESA_2
                           ,ATIVIDADE_EMPRESA_2
                           ,DATA_ADMISSAO_2
                           ,DATA_DEMISSAO_2
                           ,FUNCAO_EXERCIDA_2
-                          ,ATIVIDADE_EMPRESA_2
+                          ,ATIVIDADE_EXERCIDA_2
                           ,SALARIO_2
                     ) values (
                            :nome
@@ -125,8 +125,12 @@ switch ($_REQUEST['tipoAcao']) {
                 $dataPisPasep = Util::formataData($_REQUEST['dataPisPasep'],'/','-','USA');
                 /* @var $vencimentoHabilitacao date */
                 $vencimentoHabilitacao = Util::formataData($_REQUEST['vencimentoHabilitacao'],'/','-','USA');
+                /* @var $dataAdmissao_1 date */
+                $dataAdmissao_1 = Util::formataData($_REQUEST['dataAdmissao_1'],'/','-','USA');
                 /* @var $dataDemissao_1 date */
                 $dataDemissao_1 = Util::formataData($_REQUEST['dataDemissao_1'],'/','-','USA');
+                /* @var $dataAdmissao_2 date */
+                $dataAdmissao_2 = Util::formataData($_REQUEST['dataAdmissao_2'],'/','-','USA');
                 /* @var $dataDemissao_2 date */
                 $dataDemissao_2 = Util::formataData($_REQUEST['dataDemissao_2'],'/','-','USA');
                 /* @var $salario_1 float */
@@ -197,8 +201,8 @@ switch ($_REQUEST['tipoAcao']) {
 	    	$resposta['msgResposta'] = $e->getMessage();
         $resposta['sucesso']    = false;
 	    }
-            echo json_encode($resposta);
-            break;
+      echo json_encode($resposta);
+      break;
 	case '2':
 	    try {
             $sql = "update 
@@ -242,14 +246,14 @@ switch ($_REQUEST['tipoAcao']) {
                           ,DATA_ADMISSAO_1          = ?
                           ,DATA_DEMISSAO_1          = ?
                           ,FUNCAO_EXERCIDA_1        = ?
-                          ,ATIVIDADE_EMPRESA_1      = ?
+                          ,ATIVIDADE_EXERCIDA_1     = ?
                           ,SALARIO_1                = ?
                           ,NOME_EMPRESA_2           = ?
                           ,ATIVIDADE_EMPRESA_2      = ?
                           ,DATA_ADMISSAO_2          = ?
                           ,DATA_DEMISSAO_2          = ?
                           ,FUNCAO_EXERCIDA_2        = ?
-                          ,ATIVIDADE_EMPRESA_2      = ?
+                          ,ATIVIDADE_EXERCIDA_2     = ?
                           ,SALARIO_2                = ?
                     where
                            ID = ?";
@@ -263,15 +267,30 @@ switch ($_REQUEST['tipoAcao']) {
             $dataPisPasep = Util::formataData($_REQUEST['dataPisPasep'],'/','-','USA');
             /* @var $vencimentoHabilitacao date */
             $vencimentoHabilitacao = Util::formataData($_REQUEST['vencimentoHabilitacao'],'/','-','USA');
+            /* @var $dataAdmissao_1 date */
+            $dataAdmissao_1 = Util::formataData($_REQUEST['dataAdmissao_1'],'/','-','USA');
             /* @var $dataDemissao_1 date */
             $dataDemissao_1 = Util::formataData($_REQUEST['dataDemissao_1'],'/','-','USA');
+            /* @var $dataAdmissao_2 date */
+            $dataAdmissao_2 = Util::formataData($_REQUEST['dataAdmissao_2'],'/','-','USA');
             /* @var $dataDemissao_2 date */
             $dataDemissao_2 = Util::formataData($_REQUEST['dataDemissao_2'],'/','-','USA');
             /* @var $salario_1 float */
             $salario_1 = str_replace(',','.',str_replace('.','',$_REQUEST['salario_1']));
             /* @var $salario_2 float */
             $salario_2 = str_replace(',','.',str_replace('.','',$_REQUEST['salario_2']));
-
+            // echo "<pre>";
+            // print_r($_REQUEST);
+            // echo "<br>".$dataNascimento;
+            // echo "<br>".$dataExpedicaoRg;
+            // echo "<br>".$dataPisPasep;
+            // echo "<br>".$vencimentoHabilitacao;
+            // echo "<br>".$dataAdmissao_1;
+            // echo "<br>".$dataDemissao_1;
+            // echo "<br>".$dataAdmissao_2;
+            // echo "<br>".$dataDemissao_2;
+            // echo "</pre>";
+            // die;
             $count = $rs->execute(array($_REQUEST['nome']
                                        ,$_REQUEST['sexo']
                                        ,$_REQUEST['endereco']
@@ -305,7 +324,6 @@ switch ($_REQUEST['tipoAcao']) {
                                        ,(!empty($_REQUEST['msn']) ? $_REQUEST['msn'] : null)
                                        ,(!empty($_REQUEST['twitter']) ? $_REQUEST['twitter'] : null)
                                        ,(!empty($_REQUEST['facebook']) ? $_REQUEST['facebook'] : null)
-                                       ,$_REQUEST['ID_CURRICULO']
                                        ,(!empty($_REQUEST['nomeEmpresa_1']) ? $_REQUEST['nomeEmpresa_1'] : null)
                                        ,(!empty($_REQUEST['atividadeEmpresa_1']) ? $_REQUEST['atividadeEmpresa_1'] : null)
                                        ,(!empty($dataAdmissao_1) ? $dataAdmissao_1 : null)
@@ -319,7 +337,8 @@ switch ($_REQUEST['tipoAcao']) {
                                        ,(!empty($dataDemissao_2) ? $dataDemissao_2 : null)
                                        ,(!empty($_REQUEST['funcaoExercida_2']) ? $_REQUEST['funcaoExercida_2'] : null)
                                        ,(!empty($_REQUEST['atividadeExercida_2']) ? $_REQUEST['atividadeExercida_2'] : null)
-                                       ,(!empty($salario_2) ? $salario_2 : null)));
+                                       ,(!empty($salario_2) ? $salario_2 : null)
+                                       ,$_REQUEST['ID_CURRICULO']));
 
             if($count === false){
                 $resposta['msgResposta'] = utf8_encode("Erro ao alterar os dados do curr&iacute;culo.");
