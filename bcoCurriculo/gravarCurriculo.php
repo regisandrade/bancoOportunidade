@@ -50,7 +50,6 @@ switch ($_REQUEST['tipoAcao']) {
                           ,TWITTER
                           ,FACEBOOK
                           ,DATA_CADASTRO
-                          ,ID_ALUNO
                           ,NOME_EMPRESA_1
                           ,ATIVIDADE_EMPRESA_1
                           ,DATA_ADMISSAO_1
@@ -100,7 +99,6 @@ switch ($_REQUEST['tipoAcao']) {
                           ,:twitter
                           ,:facebook
                           ,:data_cadastro
-                          ,:id_aluno
                           ,:nome_empresa_1
                           ,:atividade_empresa_1
                           ,:data_admissao_1
@@ -172,7 +170,6 @@ switch ($_REQUEST['tipoAcao']) {
                                             ':twitter'=>$_REQUEST['twitter'],
                                             ':facebook'=>$_REQUEST['facebook'],
                                             ':data_cadastro'=>date('Y-m-d'),
-                                            ':id_aluno'=>$_REQUEST['idAluno'],
                                             ':nome_empresa_1'=>$_REQUEST['nomeEmpresa_1'],
                                             ':atividade_empresa_1'=>$_REQUEST['atividadeEmpresa_1'],
                                             ':data_admissao_1'=>$dataAdmissao_1,

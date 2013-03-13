@@ -126,7 +126,7 @@ $registroAluno = $consulta2->fetch(PDO::FETCH_OBJ);
     <input type="hidden" name="ID_CURRICULO" value="<?php echo ($registroCurriculo && $registroCurriculo->ID != '' ? $registroCurriculo->ID : ''); ?>" />
     <input type="hidden" name="tipoAcao" id="tipoAcao" value="<?php echo ($registroCurriculo && $registroCurriculo->ID != '' ? '2' : '1'); ?>"/>
     <input type="hidden" name="cpf" value="<?php echo $_SESSION['id_numero']; ?>" />
-    <input type="hidden" name="idAluno" value="<?php echo ($registroCurriculo && $registroCurriculo->CPF != '' ? $registroCurriculo->CPF : $registroAluno->CPF); ?>" />
+    <input type="hidden" name="idAluno" value="<?php echo ($registroCurriculo && $registroCurriculo->CPF != '' ? str_replace('.','',str_replace('-','',$registroCurriculo->CPF)) : str_replace('.','',str_replace('-','',$registroAluno->CPF))); ?>" />
     <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
             <td style="width: 33%" class="vermelho">Nome:</td>
